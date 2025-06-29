@@ -20,5 +20,5 @@ variable "gcp_zone" {
 variable "instance_type" {
   description = "GCE machine type"
   type        = string
-  default     = "e2-micro"
+  default     = "e2-standard-4"
 }
