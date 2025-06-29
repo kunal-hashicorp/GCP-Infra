@@ -16,8 +16,8 @@ resource "google_service_account" "vm_sa" {
   display_name = "VM Service Account"
 }
 
-resource "google_compute_firewall" "vm_firewall" {
-  name    = "allow-ssh-http-https-8080"
+resource "google_compute_firewall" "allow_ssh_http_https" {
+  name    = "terraform-allow"
   network = "default"
 
   allow {
@@ -25,8 +25,10 @@ resource "google_compute_firewall" "vm_firewall" {
     ports    = ["22", "80", "443", "8080"]
   }
 
+  direction     = "INGRESS"
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["terraform-vm"]
+
+  target_tags = ["terraform-vm"]
 }
 
 resource "google_compute_instance" "vm_instance" {
