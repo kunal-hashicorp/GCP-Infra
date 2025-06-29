@@ -1,12 +1,5 @@
 # main.tf
 
-terraform {
-  backend "gcs" {
-    bucket = "ks-terraform-state-bucket"
-    prefix = "terraform/state"
-  }
-}
-
 provider "google" {
   project = var.gcp_project
   region  = var.gcp_region
