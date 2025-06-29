@@ -20,3 +20,9 @@ variable "instance_type" {
   type        = string
   default     = "e2-micro"
 }
+
+variable "gcs_bucket" {
+  description = "GCS bucket for remote Terraform state"
+  type        = string
+  default     = "gcp-terraform-state-bucket"
+}
