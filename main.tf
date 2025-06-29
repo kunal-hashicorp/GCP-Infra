@@ -22,7 +22,7 @@ resource "google_compute_firewall" "allow_ssh_http_https" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22", "80", "443", "8080"]
+    ports    = ["22", "80", "443", "8800"]
   }
 
   direction     = "INGRESS"
