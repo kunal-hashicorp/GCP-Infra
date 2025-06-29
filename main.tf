@@ -1,3 +1,10 @@
+terraform {
+  backend "gcs" {
+    bucket  = var.gcs_bucket
+    prefix  = "terraform/state"
+  }
+}
+
 provider "google" {
   project = var.gcp_project
   region  = var.gcp_region
@@ -9,21 +16,11 @@ data "google_compute_image" "custom_image" {
   project = "ubuntu-os-pro-cloud"
 }
 
-
-# Create a service account
 resource "google_service_account" "vm_sa" {
   account_id   = "vm-service-account"
   display_name = "VM Service Account"
 }
 
-# Assign IAM roles to the service account
-/*resource "google_project_iam_member" "sa_role" {
-  project = var.gcp_project
-  role    = "roles/storage.objectViewer"
-  member  = "serviceAccount:${google_service_account.vm_sa.email}"
-}*/
-
-# Create the instance
 resource "google_compute_instance" "vm_instance" {
   name         = "terraform-vm"
   machine_type = var.instance_type
@@ -37,7 +34,7 @@ resource "google_compute_instance" "vm_instance" {
 
   network_interface {
     network       = "default"
-    access_config {} # required for external IP
+    access_config {}
   }
 
   service_account {
@@ -48,7 +45,6 @@ resource "google_compute_instance" "vm_instance" {
   tags = ["terraform-vm"]
 }
 
-# Output the instance's public IP
 output "instance_public_ip" {
   value = google_compute_instance.vm_instance.network_interface[0].access_config[0].nat_ip
 }
