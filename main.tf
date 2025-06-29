@@ -1,3 +1,5 @@
+# main.tf
+
 provider "google" {
   project = var.gcp_project
   region  = var.gcp_region
@@ -12,6 +14,19 @@ data "google_compute_image" "custom_image" {
 resource "google_service_account" "vm_sa" {
   account_id   = "vm-service-account"
   display_name = "VM Service Account"
+}
+
+resource "google_compute_firewall" "vm_firewall" {
+  name    = "allow-ssh-http-https-8080"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22", "80", "443", "8080"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["terraform-vm"]
 }
 
 resource "google_compute_instance" "vm_instance" {
