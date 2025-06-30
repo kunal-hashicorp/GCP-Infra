@@ -1,4 +1,4 @@
-# main.tf
+#main.tf
 
 provider "google" {
   project = var.gcp_project
@@ -39,6 +39,7 @@ resource "google_compute_instance" "vm_instance" {
   boot_disk {
     initialize_params {
       image = data.google_compute_image.custom_image.self_link
+      size  = var.boot_disk_size_gb
     }
   }
 
