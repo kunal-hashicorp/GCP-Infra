@@ -60,10 +60,13 @@ resource "google_compute_instance" "vm_instance" {
   tags = ["terraform-vm"]
 }
 
-output "instance_ips" {
-  description = "Public and Private IPs of the VM"
-  value = {
-    public_ip  = google_compute_instance.vm_instance.network_interface[0].access_config[0].nat_ip
-    private_ip = google_compute_instance.vm_instance.network_interface[0].network_ip
-  }
+output "instance_public_ip" {
+  description = "The public IP address of the VM"
+  value       = google_compute_instance.vm_instance.network_interface[0].access_config[0].nat_ip
 }
+
+output "instance_private_ip" {
+  description = "The private IP address of the VM"
+  value       = google_compute_instance.vm_instance.network_interface[0].network_ip
+}
+
