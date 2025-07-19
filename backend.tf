@@ -2,7 +2,7 @@
 
 terraform {
   backend "gcs" {
-    bucket = "ks-terraform-state-bucket"
+    bucket = "ks1-terraform-state-bucket"
     prefix = "terraform/state"
   }
 }
