@@ -1,30 +1,42 @@
-#variables.tf
-
 variable "gcp_project" {
-  description = "GCP Project ID"
+  description = "GCP project ID"
   type        = string
 }
 
 variable "gcp_region" {
   description = "GCP region"
   type        = string
-  default     = "us-central1"
 }
 
 variable "gcp_zone" {
   description = "GCP zone"
   type        = string
-  default     = "us-central1-a"
 }
 
 variable "instance_type" {
   description = "GCE machine type"
   type        = string
-  default     = "e2-standard-4"
+  default     = "e2-medium"
 }
 
 variable "boot_disk_size_gb" {
-  description = "Size of the boot disk in GB"
+  description = "Boot disk size in GB"
   type        = number
-  default     = 50
+  default     = 20
 }
+
+variable "dns_zone_name" {
+  description = "Name of the existing Cloud DNS zone"
+  type        = string
+}
+
+variable "dns_domain" {
+  description = "Base domain of your DNS zone (e.g. kunalsingh-17b577.gcp.sbx.hashicorpdemo.com)"
+  type        = string
+}
+
+variable "dns_record_name" {
+  description = "The subdomain name to create under the DNS zone"
+  type        = string
+}
+
