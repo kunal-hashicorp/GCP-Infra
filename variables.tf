@@ -40,3 +40,9 @@ variable "dns_record_name" {
   type        = string
 }
 
+variable "dns_record_ttl" {
+  description = "TTL (Time to Live) for the DNS record"
+  type        = number
+  default     = 300  # Optional: set a reasonable default
+}
+
