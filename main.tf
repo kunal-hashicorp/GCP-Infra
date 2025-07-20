@@ -51,9 +51,9 @@ resource "google_compute_instance" "vm_instance" {
     scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 
- /* metadata = {
+  metadata = {
     ssh-keys = "jenkins:${file("${path.module}/keys/jenkins_gcp_key.pub")}"
-  } */
+  }
 
   tags = ["terraform-vm"]
 }
