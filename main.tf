@@ -1,5 +1,3 @@
-#main.tf
-
 provider "google" {
   project = var.gcp_project
   region  = var.gcp_region
@@ -45,7 +43,7 @@ resource "google_compute_instance" "vm_instance" {
 
   network_interface {
     network       = "default"
-    access_config {}  # Enables external IP for SSH
+    access_config {}
   }
 
   service_account {
@@ -53,20 +51,9 @@ resource "google_compute_instance" "vm_instance" {
     scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 
-  metadata = {
+ /* metadata = {
     ssh-keys = "jenkins:${file("${path.module}/keys/jenkins_gcp_key.pub")}"
-  }
+  } */
 
   tags = ["terraform-vm"]
 }
-
-output "instance_public_ip" {
-  description = "The public IP address of the VM"
-  value       = google_compute_instance.vm_instance.network_interface[0].access_config[0].nat_ip
-}
-
-output "instance_private_ip" {
-  description = "The private IP address of the VM"
-  value       = google_compute_instance.vm_instance.network_interface[0].network_ip
-}
-
