@@ -13,7 +13,7 @@ dns_record_ttl    = 3600
 
 db_name     = "postgres-instance"
 db_user     = "postgres"
-db_password = "Iamdb123"
+db_password = ""
 db_tier     = "db-n1-standard-16"
 
 bucket_name = "ks1-terraform-vm-bucket"
