@@ -1,3 +1,5 @@
+# variables.tf
+
 variable "gcp_project" {
   description = "GCP project ID"
   type        = string
@@ -43,6 +45,36 @@ variable "dns_record_name" {
 variable "dns_record_ttl" {
   description = "TTL (Time to Live) for the DNS record"
   type        = number
-  default     = 300  # Optional: set a reasonable default
+  default     = 300
 }
 
+variable "db_name" {
+  description = "Name of the PostgreSQL database instance"
+  type        = string
+  default     = "postgres-instance"
+}
+
+variable "db_user" {
+  description = "PostgreSQL DB user"
+  type        = string
+  default     = "postgres"
+}
+
+variable "db_password" {
+  description = "PostgreSQL DB password"
+  type        = string
+  sensitive   = true
+  default     = "Iamdb123"
+}
+
+variable "db_tier" {
+  description = "Instance class for the database"
+  type        = string
+  default     = "db-n1-standard-16"
+}
+
+variable "bucket_name" {
+  description = "GCS bucket to be created"
+  type        = string
+  default     = "ks1-terraform-vm-bucket"
+}
