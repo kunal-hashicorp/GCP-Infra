@@ -1,3 +1,5 @@
+# main.tf
+
 provider "google" {
   project = var.gcp_project
   region  = var.gcp_region
@@ -56,4 +58,48 @@ resource "google_compute_instance" "vm_instance" {
   }
 
   tags = ["terraform-vm"]
+}
+
+resource "google_project_iam_member" "vm_sa_bucket_access" {
+  project = var.gcp_project
+  role    = "roles/storage.admin"
+  member  = "serviceAccount:${google_service_account.vm_sa.email}"
+}
+
+resource "google_storage_bucket" "vm_bucket" {
+  name     = var.bucket_name
+  location = var.gcp_region
+}
+
+resource "google_sql_database_instance" "postgres_instance" {
+  name             = var.db_name
+  database_version = "POSTGRES_15"
+  region           = var.gcp_region
+
+  settings {
+    tier = var.db_tier
+    ip_configuration {
+      ipv4_enabled    = true
+      authorized_networks {
+        name  = "public-access"
+        value = "0.0.0.0/0"
+      }
+    }
+    backup_configuration {
+      enabled = true
+    }
+  }
+
+  deletion_protection = false
+}
+
+resource "google_sql_user" "db_user" {
+  name     = var.db_user
+  instance = google_sql_database_instance.postgres_instance.name
+  password = var.db_password
+}
+
+resource "google_sql_database" "default" {
+  name     = "defaultdb"
+  instance = google_sql_database_instance.postgres_instance.name
 }
