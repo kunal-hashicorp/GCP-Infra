@@ -11,7 +11,9 @@ dns_domain        = "kunalsingh-17b577.gcp.sbx.hashicorpdemo.com"
 dns_record_name   = "ks-fdo-test"
 dns_record_ttl    = 3600
 
+db_name     = "postgres-instance"
+db_user     = "postgres"
+db_password = "Iamdb123"
+db_tier     = "db-n1-standard-16"
 
-
-
-
+bucket_name = "ks1-terraform-vm-bucket"
