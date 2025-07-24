@@ -1,5 +1,6 @@
+# dns.tf
 resource "google_dns_record_set" "a_record" {
-  name         = "${var.dns_record_name}.kunalsingh-17b577.gcp.sbx.hashicorpdemo.com."
+  name         = "${var.dns_record_name}.${var.dns_domain}."
   type         = "A"
   ttl          = var.dns_record_ttl
   managed_zone = "doormat-useremail"
