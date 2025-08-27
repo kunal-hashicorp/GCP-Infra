@@ -1,6 +1,6 @@
 # terraform.tfvars
 
-gcp_project       = "hc-694f54fc6dd944dbbb1e2f854f3"
+gcp_project       = "hc-723f1d51c3404bd287a25cd744a"
 gcp_region        = "us-central1"
 gcp_zone          = "us-central1-a"
 instance_type     = "e2-medium"
