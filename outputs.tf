@@ -9,5 +9,5 @@ output "instance_private_ip" {
 }
 
 output "dns_full_record" {
-  value = trimsuffix("${var.dns_record_name}.kunalsingh-17b577.gcp.sbx.hashicorpdemo.com.", ".")
+  value = trimsuffix("${var.dns_record_name}.${google_dns_managed_zone.dns_zone.dns_name}", ".")
 }
