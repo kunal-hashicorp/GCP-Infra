@@ -16,13 +16,13 @@ variable "gcp_zone" {
 variable "instance_type" {
   description = "GCE machine type"
   type        = string
-  default     = "e2-medium"
+  default     = "e2-standard-4"
 }
 
 variable "boot_disk_size_gb" {
   description = "Boot disk size in GB"
   type        = number
-  default     = 20
+  default     = 50
 }
 
 variable "dns_zone_name" {
