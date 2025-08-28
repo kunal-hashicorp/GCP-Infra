@@ -46,3 +46,7 @@ variable "dns_record_ttl" {
   default     = 300  # Optional: set a reasonable default
 }
 
+variable "bucket" {
+  description = "GCS bucket for storing Terraform state"
+  type        = string
+}
